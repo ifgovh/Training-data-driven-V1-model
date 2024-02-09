@@ -445,20 +445,9 @@ if __name__ == '__main__':
     if hostname.count('scherr-pc') > 0:
         _data_dir = '/data/allen/v1_model/GLIF_network'
         _results_dir = '/data/output/billeh'
-    elif hostname.count('nvcluster') > 0:
-        _data_dir = os.path.expanduser('~/tf_billeh_column/GLIF_network')
-        _results_dir = '/srv/local/ifgovh/RESULTS'
     elif hostname.count('juwels') > 0:
         _data_dir = '/p/project/structuretofunction/guozhang/glif_criticality/GLIF_network'
         _results_dir = '/p/scratch/structuretofunction/chen/RESULTS'
-    elif hostname.count('pCluster') > 0:
-        # _data_dir = '/calc/scherr/allen/v1_model/GLIF_network'
-        # _results_dir = '/calc/scherr/output/billeh'
-        _data_dir = '/home/guozhang/tf_billeh_column/GLIF_network'
-        _results_dir = '/home/guozhang/RESULTS'
-    elif hostname.count('nid') > 0:
-        _data_dir = '/users/bp000436/glif_criticality/GLIF_network'
-        _results_dir = '/scratch/snx3000/bp000436/RESULTS'
     else:
         _data_dir = ''
         _results_dir = ''
