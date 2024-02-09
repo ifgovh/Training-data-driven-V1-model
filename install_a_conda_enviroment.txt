@@ -1,0 +1,7 @@
+conda create -n tf python
+conda activate tf
+conda install cudnn
+pip install tensorflow-gpu
+pip install matplotlib pandas tqdm numpy scipy
+pip install https://github.com/IGITUGraz/SimManager/archive/v0.8.3.zip
+pip install git+git://github.com/franzscherr/bmtk@f_dev
