@@ -20,7 +20,7 @@
 - do ```python multi_training.py``` to train the V1 model for 5 tasks together.
 
 # Authorship
-The code package was written by [Guozhang Chen](https://ifgovh.github.io/) and [Franz Scheer](https://www.franzscherr.com/) (initilized).
+The code package was written by [Franz Scheer](https://www.franzscherr.com/) and [Guozhang Chen](https://ifgovh.github.io/) (equally contributed).
 
 # Citation
 @article{chen2022data,
