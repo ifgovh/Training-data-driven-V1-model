@@ -17,6 +17,7 @@
   When you run the code, you should give dir/parent_folder/GLIF_network to flag "data_dir".
   
   For LGN supporting file, you have to give it in /lgn_model/lgn.py line 88-99 where I hard coded there. Or, you can specify the path to lgn_full_col_cells_3.csv as an argument when you call LGN in stim_dataset.py.
+- do ```python multi_training.py``` to train the V1 model for 5 tasks together.
 
 # Authorship
 The code package was written by Guozhang Chen and Franz Scheer.
