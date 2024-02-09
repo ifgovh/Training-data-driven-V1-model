@@ -43,6 +43,5 @@ The code package was written by [Franz Scheer](https://www.franzscherr.com/) and
   publisher={Cold Spring Harbor Laboratory}
 }
 
-# Other links
-The following paper(s) have utilized or derived from the code provided in this repository:
+# The following paper(s) have utilized or derived from the code provided in this repository:
 Fraile, J. G., Scherr, F., Sukia, J. R., Arkhipov, A., Maass, W., & Santos, C. R. M. (2023). [Prediction error computation in cortical neurons via competition between bottom-up visual input and recurrent inhibition.](https://www.ibroneuroreports.org/article/S2667-2421(23)01666-4/fulltext) IBRO Neuroscience Reports, 15, S780.
