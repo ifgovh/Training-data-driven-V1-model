@@ -365,7 +365,7 @@ def compute_spike_rate_distribution_loss(_spikes, target_rate):
     _rate = tf.gather(_rate, rand_ind)
     sorted_rate = tf.sort(_rate)
 
-    u = target_rate - sorted_rate
+    u = sorted_rate - target_rate
     tau = (tf.cast(tf.range(target_rate.shape[0]), tf.float32) + 1) / target_rate.shape[0]
     loss = huber_quantile_loss(u, tau, .002)
 
