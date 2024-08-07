@@ -301,24 +301,49 @@ def reduce_input_population(input_population, new_n_input, seed=3000):
     new_input_population = dict(n_inputs=new_n_input, indices=new_in_ind, weights=new_in_weights, spikes=None)
     return new_input_population
 
-def set_laminar_indices(df, network, L2_neuron_ratio=0.5):
-    def get_one_layer_indices(EI,layer_number):
-        types_indices = []
-        for a in df.iterrows():
-            if a[1]['pop_name'].startswith(f'{EI}{layer_number}'):
-                types_indices.append(a[0])
-        types_indices = np.array(types_indices)
-        neuron_sel = np.zeros(network['n_nodes'], np.bool)
-        for type_index in types_indices:
-            is_type = network['node_type_ids'] == type_index
-            neuron_sel = np.logical_or(neuron_sel, is_type)
-        return np.where(neuron_sel)[0]
+def set_laminar_indices(df, h5_path, network, L2_neuron_ratio=0.5):
+    # locate neuron population
+    node_types = df
+    node_h5 = h5py.File(h5_path, mode='r')
+    node_type_id_to_pop_name = dict()
+    for nid in np.unique(node_h5['nodes']['v1']['node_type_id']):
+        ind_list = np.where(node_types.node_type_id == nid)[0]
+        assert len(ind_list) == 1
+        node_type_id_to_pop_name[nid] = node_types.pop_name[ind_list[0]]
 
+    all_pop_names = []
+    for nid in node_h5['nodes']['v1']['node_type_id']:
+        all_pop_names.append(node_type_id_to_pop_name[nid])
+    all_pop_names = np.array(all_pop_names)[network['tf_id_to_bmtk_id']]
+
+    neuron_pop_id_to_name = ['i1Htr3a', 'e23', 'i23Pvalb', 'i23Sst', 'i23Htr3a', 'e4', 'i4Pvalb', 'i4Sst', 'i4Htr3a', 'e5', 'i5Pvalb', 'i5Sst', 'i5Htr3a', 'e6', 'i6Pvalb', 'i6Sst', 'i6Htr3a']
+    neuron_pop_name_to_id = dict()
+    for i, name in enumerate(neuron_pop_id_to_name):
+        neuron_pop_name_to_id[name] = i
+
+    rough_neuron_pop_names = np.zeros_like(all_pop_names, np.int32)
+    for i, pop_name in enumerate(all_pop_names):
+        for j, pp_name in enumerate(neuron_pop_id_to_name):
+            if pop_name.startswith(pp_name):
+                rough_neuron_pop_names[i] = j
+                break
     network['laminar_indices'] = dict()
-    for EI in ['e','i']:
-        for layer_number in [1,23,4,5,6]:
-            network['laminar_indices'][f'L{layer_number}{EI}'] = get_one_layer_indices(EI,layer_number)
+    # exc neurons
+    network['laminar_indices'][f'L{1}e'] = np.array([])
+    exc_ind = [1,5,9,13]
+    for i, layer_number in enumerate([23,4,5,6]):
+        network['laminar_indices'][f'L{layer_number}e'] = np.where(rough_neuron_pop_names==exc_ind[i])[0]
 
+    # exc neurons
+    network['laminar_indices'][f'L{1}i'] = np.where(rough_neuron_pop_names==0)[0]
+    inh_ind = [2,6,10,14]
+    for i, layer_number in enumerate([23,4,5,6]):
+        temp = []
+        for ii in range(3):
+            temp.append(np.where(rough_neuron_pop_names==inh_ind[i]+ii)[0])
+        network['laminar_indices'][f'L{layer_number}i'] = np.concatenate(temp)   
+
+        
     # split 2 3 layers
     vertical_coordinates_e = network['y'][network['laminar_indices']['L23e']]
     vertical_coordinates_i = network['y'][network['laminar_indices']['L23i']]
