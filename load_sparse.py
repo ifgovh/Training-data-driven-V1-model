@@ -382,7 +382,7 @@ def load_billeh(n_input, n_neurons, core_only, data_dir, seed=3000, connected_se
         bmtk_id_to_tf_id=network['bmtk_id_to_tf_id'])
 
     df = pd.read_csv(os.path.join(data_dir, 'network/v1_node_types.csv'), delimiter=' ')
-    network = set_laminar_indices(df, network)
+    network = set_laminar_indices(df, h5_path, network)
 
     l5e_types_indices = []
     for a in df.iterrows():
