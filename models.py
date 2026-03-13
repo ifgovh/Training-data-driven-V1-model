@@ -392,7 +392,7 @@ class VoltageRegularization:
     def __call__(self, voltages):
         voltage_32 = (tf.cast(voltages, tf.float32) - self._cell.voltage_offset) / self._cell.voltage_scale
         v_pos = tf.square(tf.nn.relu(voltage_32 - 1.))
-        v_neg = tf.square(tf.nn.relu(-voltage_32 + 1.))
+        v_neg = tf.square(tf.nn.relu(-voltage_32 - 1.))
         voltage_loss = tf.reduce_mean(tf.reduce_sum(v_pos + v_neg, -1)) * self._voltage_cost
         return voltage_loss
 
@@ -430,3 +430,4 @@ class SpikeVoltageRegularization(tf.keras.layers.Layer):
         self.add_loss(voltage_loss)
         self.add_metric(voltage_loss, name='voltage_loss', aggregation='mean')
         return inputs
+
