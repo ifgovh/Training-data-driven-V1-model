@@ -4,7 +4,7 @@
 
 # To run the code
 - Please follow the instruction in "install_a_conda_enviroment" first.
-- Download supporting files from [here](https://cloud.tugraz.at/index.php/s/JmDakasAHEqsA9J)
+- Download supporting files from [here](https://zenodo.org/records/19965055?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjgzYTdlOTAwLTNkMDItNDk5OS05NzczLWI2YjIxOTYyZTZjMiIsImRhdGEiOnt9LCJyYW5kb20iOiIzYjdmYzYxZDIzNTZhM2ZkZmE1ZmUyOWQ3OGI1NGYwNiJ9.FI4VXWocUFYt-osjBTMUGhvAsIp7WocpG_ibyKbGCuT2Uz5XLxHG6KKB8kNK0qmcsN0tF8xaiHndyn9lBJDp4g)
 - Make sure the file structure is like:
   dir/parent_folder/GLIF_network/network
   
